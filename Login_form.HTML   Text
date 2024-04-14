@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css_styles/styleTH.css">
+    <title>Title</title>
+</head>
+<body>
+
+<nav>
+        <ul>
+             <li><a href="index.html">Home</a></li>
+            <li><a href="page1.html">Weather</a></li>
+            <li><a href="Widget_Time.html">Widget</a></li>
+            <li><a href="Target Calc.html">Target Calculate</a></li>
+        </ul>
+   </nav>
+ <div >
+        <h2>Login</h2>
+        <form action="/php_scripts/login.php" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+         <p>Don't have an account? <a href="/php_scripts/register_form.php">Register here</a>.</p>
+    </div>
+</body>
+</html>
