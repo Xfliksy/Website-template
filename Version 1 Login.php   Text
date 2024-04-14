@@ -1,0 +1,93 @@
+<?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$database = "gymdb";
+$port = 8889; // MySQL port in MAMP
+
+// Create a new MySQL connection
+$conn = new mysqli($servername, $username, $password, $database, $port);
+// Check for connection errors
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Form submission handling
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ // Retrieve and sanitize user inputs
+
+    $username = $conn->real_escape_string($_POST["username"]);
+    $password = $conn->real_escape_string($_POST["password"]);
+    echo $username;
+    echo $password ;
+    echo 'password and username reached';
+    echo "<br>";
+
+    // Prepare a SQL statement using placeholders
+.
+    $sql = "SELECT * FROM users WHERE username = ?";
+    // The second line prepares the SQL statement using the prepare()
+
+    $stmt = $conn->prepare($sql);
+    echo 'statement reached';
+    echo "<br>";
+    echo $sql;
+    // Bind parameters to the prepared statement
+  
+ 
+    $stmt->bind_param("s", $username);
+
+    // Execute the statement
+
+    $stmt->execute();
+
+    // Get the result
+
+    $result = $stmt->get_result();
+    echo "Number of rows: " . $result->num_rows . "<br>";
+
+    if ($result->num_rows > 0) {
+        // User found, redirect to a new page
+        $row = $result->fetch_assoc();
+        $hashedPassword = $row['password'];
+
+        if (password_verify($password, $hashedPassword)) {
+            // Set the user_id in the session
+            $_SESSION['user_id'] = $row['user_id'];
+            // Password is correct, redirect to a new page
+
+            echo " session id ".$_SESSION['user_id'];
+
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            // If the password does not match, output an error
+            echo "Invalid username or password";
+        }
+    } else {
+        // User not found, display an error message
+        echo "Invalid username or password";
+    }
+
+    // Close the prepared statement
+    $stmt->close();
+}
+
+
+
+print_r($_POST);
+
+// Debugging: print the POST array to confirm form submission data
+print_r($_POST);
+
+// Debugging: Dump the session array to check for set session variables
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
+// Close the database connection
+$conn->close();
+
+?>
