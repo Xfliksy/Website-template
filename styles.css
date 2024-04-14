@@ -74,3 +74,27 @@ header {
     line-height: 1.5;
     margin: 0;
   }
+
+  .visit-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    background: url(lionsleeping.jpg) center no-repeat;
+    background-size: cover;
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  } 
+
+  .form-title{
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+  }
+  
